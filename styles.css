@@ -9,6 +9,10 @@
   --primary: #2a9d8f; /* soft teal/green */
   --primary-600: #21867a;
   --accent: #4ea1d3; /* soft blue */
+  --accent-2: #a78bfa; /* lavender */
+  --accent-3: #fb7185; /* rose */
+  --accent-4: #f59e0b; /* amber */
+  --accent-5: #34d399; /* green */
   --warning: #ffb703;
   --danger: #e76f51;
   --muted: #6b7280;
@@ -24,14 +28,19 @@ body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color: var(--text);
-  background: radial-gradient(1200px 600px at 10% -10%, #e6f4f9, transparent 60%), var(--bg);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #e6f4f9, transparent 60%),
+    radial-gradient(900px 300px at 110% 10%, rgba(167,139,250,0.18), transparent 60%),
+    var(--bg);
 }
 
 .app-header {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: linear-gradient(180deg, #ffffff 0%, #f9fdff 100%);
+  background:
+    linear-gradient(180deg, rgba(78,161,211,0.10), rgba(42,157,143,0.06)),
+    linear-gradient(180deg, #ffffff 0%, #f9fdff 100%);
   border-bottom: 1px solid #e6eef4;
 }
 .brand {
@@ -68,7 +77,7 @@ body {
 }
 .nav-btn:hover { box-shadow: var(--shadow); }
 .nav-btn:active { transform: translateY(1px); }
-.nav-btn.is-active { background: #e9f6ff; border-color: #cfe8f7; color: #0c3b50; }
+.nav-btn.is-active { background: linear-gradient(90deg, #e9f6ff, #f3e9ff); border-color: #cfe8f7; color: #0c3b50; }
 
 .app-main { max-width: 1100px; margin: 24px auto; padding: 0 16px 32px; }
 .section { display: block; }
@@ -98,6 +107,7 @@ body {
   border-radius: var(--radius);
   padding: 14px;
   box-shadow: var(--shadow);
+  background-image: linear-gradient(180deg, rgba(167,139,250,0.08), rgba(78,161,211,0.06));
 }
 .card h3 { margin: 0 0 6px 0; font-size: 18px; }
 .card .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
@@ -109,7 +119,7 @@ body {
   border-radius: 999px;
   font-size: 12px;
   border: 1px solid #e1ecf4;
-  background: #f5fbff;
+  background: linear-gradient(90deg, #f5fbff, #f7f0ff);
   color: #0f4a63;
 }
 .pill.warn { background: #fff9e8; border-color: #ffe6a5; color: #6a4600; }
@@ -124,7 +134,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
 }
-.btn.primary { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.btn.primary { background: linear-gradient(90deg, var(--primary), var(--accent)); color: #ffffff; border-color: var(--primary); }
 .btn.primary:hover { background: var(--primary-600); }
 .btn:focus { outline: 2px solid var(--ring); outline-offset: 2px; }
 
@@ -144,6 +154,7 @@ body {
   border: 1px solid #e5edf3;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  background: linear-gradient(180deg, rgba(52,211,153,0.10), rgba(251,113,133,0.10));
 }
 .pharmacy-list { display: grid; gap: 10px; }
 .pharmacy-item {
@@ -168,7 +179,7 @@ body {
 }
 .bubble { max-width: 80%; padding: 10px 12px; border-radius: 14px; border: 1px solid #dfeef6; background: #ffffff; }
 .bubble.agent { background: #ebf7ff; border-color: #cfe9f9; }
-.bubble.user { margin-left: auto; background: #e6fff6; border-color: #bff0e3; }
+.bubble.user { margin-left: auto; background: linear-gradient(90deg, #e6fff6, #f0f9ff); border-color: #bff0e3; }
 .chat-input { display: flex; gap: 10px; padding: 10px; }
 .chat-input input { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid #cfe1ec; }
 
@@ -184,6 +195,27 @@ body {
   .form-grid { grid-template-columns: 1fr; }
   .form-row { grid-column: span 12; }
   .chat-messages { height: 300px; }
+}
+
+/* Wellness */
+.wellness-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+.wellness-card { grid-column: span 4; background: var(--surface); border: 1px solid #e5edf3; border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); background-image: linear-gradient(180deg, rgba(245,158,11,0.08), rgba(167,139,250,0.06)); }
+.wellness-card h3 { margin: 0 0 8px 0; font-size: 18px; }
+.mood-choices { display: flex; gap: 8px; flex-wrap: wrap; }
+.mood-btn { border: 1px solid #e3e3f3; background: #ffffff; padding: 8px 10px; border-radius: 12px; cursor: pointer; font-size: 16px; }
+.mood-btn.is-selected { background: linear-gradient(90deg, #ffe8f0, #fff7e6); border-color: #ffc2d2; }
+.water-bar { height: 10px; background: #eef5fb; border-radius: 999px; overflow: hidden; border: 1px solid #dceaf2; }
+.water-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #34d399, #4ea1d3); transition: width .25s ease; }
+.food-list { display: grid; gap: 8px; margin-top: 8px; }
+.food-item { display: flex; justify-content: space-between; align-items: center; gap: 8px; background: #ffffff; border: 1px solid #e8eef4; border-radius: 10px; padding: 8px 10px; }
+.food-item .remove { border: 1px solid #ffd6d6; background: #fff1f1; color: #6a0e0e; border-radius: 8px; padding: 4px 8px; cursor: pointer; }
+.summary-pill { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; border: 1px solid #e1ecf4; background: linear-gradient(90deg, #e9f6ff, #e6fff6); }
+
+@media (max-width: 1024px) {
+  .wellness-card { grid-column: span 6; }
+}
+@media (max-width: 680px) {
+  .wellness-card { grid-column: span 12; }
 }
 
 

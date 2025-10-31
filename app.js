@@ -3,6 +3,7 @@
     prescriptions: 'pharmacare:prescriptions',
     profile: 'pharmacare:profile',
     chat: 'pharmacare:chat',
+    wellness: 'pharmacare:wellness',
   };
 
   const qs = (sel, el = document) => el.querySelector(sel);
@@ -82,6 +83,22 @@
         { id: generateId('msg'), from: 'agent', text: 'Hi! I\'m your PharmaCare assistant. How can I help today?' }
       ]);
     }
+    const wellness = readStorage(STORAGE_KEYS.wellness, null);
+    if (!wellness) {
+      // by date key YYYY-MM-DD
+      const today = dateKey(new Date());
+      writeStorage(STORAGE_KEYS.wellness, {
+        [today]: { mood: '', water: 0, waterMax: 8, foods: [] }
+      });
+    }
+  }
+
+  // ---------- Date Helpers ----------
+  function dateKey(d) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${y}-${m}-${day}`;
   }
 
   // ---------- Navigation ----------
@@ -109,6 +126,7 @@
     if (sectionId === 'pharmacies') renderPharmacies();
     if (sectionId === 'chat') renderChat();
     if (sectionId === 'profile') renderProfile();
+    if (sectionId === 'wellness') renderWellness();
   }
 
   // ---------- Dashboard ----------
@@ -401,6 +419,129 @@
     const el = qs('#year'); if (el) el.textContent = String(y);
   }
 
+  // ---------- Wellness ----------
+  function initWellness() {
+    // Mood
+    const moodGroup = qs('#moodChoices');
+    if (moodGroup) {
+      moodGroup.addEventListener('click', (e) => {
+        const btn = e.target.closest('.mood-btn');
+        if (!btn) return;
+        const mood = btn.getAttribute('data-mood');
+        setTodayMood(mood);
+        renderWellness();
+      });
+    }
+
+    // Water
+    const addBtn = qs('#btnAddWater');
+    const remBtn = qs('#btnRemoveWater');
+    if (addBtn) addBtn.addEventListener('click', () => { adjustWater(1); });
+    if (remBtn) remBtn.addEventListener('click', () => { adjustWater(-1); });
+
+    // Food
+    const foodForm = qs('#foodForm');
+    if (foodForm) {
+      foodForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const input = qs('#foodInput');
+        const val = (input.value || '').trim();
+        if (!val) return;
+        addFood(val);
+        input.value = '';
+        renderWellness();
+      });
+    }
+  }
+
+  function getTodayRecord() {
+    const store = readStorage(STORAGE_KEYS.wellness, {});
+    const key = dateKey(new Date());
+    if (!store[key]) store[key] = { mood: '', water: 0, waterMax: 8, foods: [] };
+    writeStorage(STORAGE_KEYS.wellness, store);
+    return store[key];
+  }
+
+  function updateTodayRecord(mutator) {
+    const store = readStorage(STORAGE_KEYS.wellness, {});
+    const key = dateKey(new Date());
+    const rec = store[key] || { mood: '', water: 0, waterMax: 8, foods: [] };
+    mutator(rec);
+    store[key] = rec;
+    writeStorage(STORAGE_KEYS.wellness, store);
+  }
+
+  function setTodayMood(mood) {
+    updateTodayRecord((r) => { r.mood = mood; });
+    addAgentMessage(`Noted your mood today: ${mood}`);
+  }
+
+  function adjustWater(delta) {
+    updateTodayRecord((r) => {
+      const max = r.waterMax || 8;
+      r.water = clamp((r.water || 0) + delta, 0, 24);
+      r.waterMax = max;
+    });
+    renderWellness();
+  }
+
+  function addFood(text) {
+    updateTodayRecord((r) => {
+      r.foods = Array.isArray(r.foods) ? r.foods : [];
+      r.foods.push({ id: generateId('food'), text });
+    });
+  }
+
+  function removeFood(id) {
+    updateTodayRecord((r) => {
+      r.foods = (r.foods || []).filter(f => f.id !== id);
+    });
+    renderWellness();
+  }
+
+  function renderWellness() {
+    const rec = getTodayRecord();
+    // Mood UI
+    const moodEl = qs('#moodToday');
+    if (moodEl) moodEl.textContent = rec.mood || '—';
+    const buttons = qsa('.mood-btn');
+    buttons.forEach(b => b.classList.toggle('is-selected', b.getAttribute('data-mood') === rec.mood));
+
+    // Water UI
+    const max = rec.waterMax || 8;
+    const fill = qs('#waterFill');
+    const countEl = qs('#waterCount');
+    const maxEl = qs('#waterMax');
+    const targetEl = qs('#waterTarget');
+    if (fill) {
+      const pct = clamp((rec.water / max) * 100, 0, 100);
+      fill.style.width = pct + '%';
+      fill.setAttribute('aria-valuenow', String(rec.water));
+      fill.setAttribute('aria-valuemax', String(max));
+    }
+    if (countEl) countEl.textContent = String(rec.water || 0);
+    if (maxEl) maxEl.textContent = String(max);
+    if (targetEl) targetEl.textContent = String(max);
+
+    // Food list
+    const listEl = qs('#foodList');
+    if (listEl) {
+      listEl.innerHTML = '';
+      (rec.foods || []).forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'food-item';
+        row.innerHTML = `<span>${item.text}</span><button class="remove" data-remove-food="${item.id}">Remove</button>`;
+        listEl.appendChild(row);
+      });
+      listEl.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-remove-food]');
+        if (!btn) return;
+        const id = btn.getAttribute('data-remove-food');
+        removeFood(id);
+      }, { once: true });
+    }
+  }
+
   // ---------- Init ----------
   function init() {
     ensureSeedData();
@@ -408,6 +549,7 @@
     initUpload();
     initChat();
     initProfile();
+    initWellness();
     renderDashboard();
     startCountdownTicker();
     setYear();

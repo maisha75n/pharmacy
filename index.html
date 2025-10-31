@@ -19,6 +19,7 @@
         <button class="nav-btn is-active" data-section="dashboard" aria-controls="section-dashboard" aria-current="page">Dashboard</button>
         <button class="nav-btn" data-section="upload" aria-controls="section-upload">Upload</button>
         <button class="nav-btn" data-section="pharmacies" aria-controls="section-pharmacies">Pharmacies</button>
+        <button class="nav-btn" data-section="wellness" aria-controls="section-wellness">Wellness</button>
         <button class="nav-btn" data-section="chat" aria-controls="section-chat">24/7 Chat</button>
         <button class="nav-btn" data-section="profile" aria-controls="section-profile">Profile</button>
       </nav>
@@ -95,6 +96,54 @@
             <input id="chatText" type="text" placeholder="Type your message..." aria-label="Message" required />
             <button type="submit" class="btn primary">Send</button>
           </form>
+        </div>
+      </section>
+
+      <!-- WELLNESS -->
+      <section id="section-wellness" class="section" aria-labelledby="wellness-heading" hidden>
+        <div class="section-header">
+          <h2 id="wellness-heading">Wellness Tracker</h2>
+          <p class="section-subtitle">Log your mood, meals, and hydration</p>
+        </div>
+        <div class="wellness-grid">
+          <article class="wellness-card" aria-labelledby="mood-heading">
+            <h3 id="mood-heading">Mood</h3>
+            <div id="moodChoices" class="mood-choices" role="group" aria-label="Select your mood">
+              <button class="mood-btn" data-mood="😀" aria-pressed="false">😀 Happy</button>
+              <button class="mood-btn" data-mood="🙂" aria-pressed="false">🙂 Okay</button>
+              <button class="mood-btn" data-mood="😐" aria-pressed="false">😐 Neutral</button>
+              <button class="mood-btn" data-mood="😕" aria-pressed="false">😕 Meh</button>
+              <button class="mood-btn" data-mood="😔" aria-pressed="false">😔 Low</button>
+            </div>
+            <div style="margin-top:10px;">
+              <span class="summary-pill">Today: <strong id="moodToday">—</strong></span>
+            </div>
+          </article>
+          <article class="wellness-card" aria-labelledby="water-heading">
+            <h3 id="water-heading">Water</h3>
+            <div class="pill" style="margin-bottom:8px;">Target: <strong id="waterTarget">8</strong> glasses</div>
+            <div class="water-bar" aria-label="Water progress">
+              <div id="waterFill" class="water-fill" role="progressbar" aria-valuemin="0" aria-valuemax="8" aria-valuenow="0"></div>
+            </div>
+            <div class="actions" style="margin-top:10px; display:flex; gap:10px;">
+              <button id="btnAddWater" class="btn primary">+1 Glass</button>
+              <button id="btnRemoveWater" class="btn">-1</button>
+              <span class="pill">Today: <strong id="waterCount">0</strong> / <span id="waterMax">8</span></span>
+            </div>
+          </article>
+          <article class="wellness-card" aria-labelledby="food-heading">
+            <h3 id="food-heading">Food Log</h3>
+            <form id="foodForm" class="form" style="box-shadow:none;">
+              <div class="form-row" style="grid-column:span 12;">
+                <label for="foodInput">Add meal/snack</label>
+                <input id="foodInput" type="text" placeholder="e.g., Oatmeal with fruit" />
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn primary">Add</button>
+              </div>
+            </form>
+            <div id="foodList" class="food-list" aria-live="polite"></div>
+          </article>
         </div>
       </section>
 
