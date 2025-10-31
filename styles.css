@@ -1,0 +1,189 @@
+/*
+  PharmaCare Styles
+  Palette: soft blues, whites, greens
+*/
+
+:root {
+  --bg: #f7fbfd;
+  --surface: #ffffff;
+  --primary: #2a9d8f; /* soft teal/green */
+  --primary-600: #21867a;
+  --accent: #4ea1d3; /* soft blue */
+  --warning: #ffb703;
+  --danger: #e76f51;
+  --muted: #6b7280;
+  --text: #1f2937;
+  --ring: rgba(78, 161, 211, 0.35);
+  --shadow: 0 10px 20px rgba(2, 43, 58, 0.08);
+  --radius: 14px;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: var(--text);
+  background: radial-gradient(1200px 600px at 10% -10%, #e6f4f9, transparent 60%), var(--bg);
+}
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fdff 100%);
+  border-bottom: 1px solid #e6eef4;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px 4px 18px;
+}
+.logo { font-size: 28px; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.08)); }
+.brand-text h1 {
+  margin: 0;
+  font-size: 20px;
+}
+.tagline {
+  margin: 2px 0 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.primary-nav {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px 14px 12px;
+  overflow-x: auto;
+}
+.nav-btn {
+  border: 1px solid #d9e6ee;
+  background: #ffffff;
+  color: #133441;
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: box-shadow .2s, transform .08s, background .2s;
+}
+.nav-btn:hover { box-shadow: var(--shadow); }
+.nav-btn:active { transform: translateY(1px); }
+.nav-btn.is-active { background: #e9f6ff; border-color: #cfe8f7; color: #0c3b50; }
+
+.app-main { max-width: 1100px; margin: 24px auto; padding: 0 16px 32px; }
+.section { display: block; }
+.section[hidden] { display: none; }
+.section-header { margin-bottom: 16px; }
+.section-header h2 { margin: 0 0 6px 0; font-size: 22px; }
+.section-subtitle { margin: 0; color: var(--muted); }
+
+.alerts { margin: 8px 0 20px; display: grid; gap: 10px; }
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff7e6;
+  border: 1px solid #ffe7b3;
+  color: #7a4b00;
+}
+.alert.due { background: #fff0f0; border-color: #ffd6d6; color: #7a1515; }
+
+.card-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 14px; }
+.card {
+  grid-column: span 4;
+  background: var(--surface);
+  border: 1px solid #e5edf3;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+}
+.card h3 { margin: 0 0 6px 0; font-size: 18px; }
+.card .meta { color: var(--muted); font-size: 13px; margin-bottom: 10px; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid #e1ecf4;
+  background: #f5fbff;
+  color: #0f4a63;
+}
+.pill.warn { background: #fff9e8; border-color: #ffe6a5; color: #6a4600; }
+.pill.danger { background: #fff1f1; border-color: #ffd2d2; color: #6a0e0e; }
+.card .actions { display: flex; gap: 10px; margin-top: 12px; }
+
+.btn {
+  border: 1px solid #d6e6ef;
+  background: #ffffff;
+  color: #0a3a4f;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.btn.primary { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+.btn.primary:hover { background: var(--primary-600); }
+.btn:focus { outline: 2px solid var(--ring); outline-offset: 2px; }
+
+.form { background: var(--surface); border: 1px solid #e5edf3; border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
+.form-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 12px; }
+.form-row { grid-column: span 6; display: flex; flex-direction: column; gap: 6px; }
+.form-row label { font-weight: 600; }
+.form-row input, .form-row select { padding: 10px 12px; border-radius: 10px; border: 1px solid #cfe1ec; }
+.help-text { color: var(--muted); font-size: 12px; }
+.error { color: var(--danger); min-height: 16px; font-size: 12px; }
+.form-actions { display: flex; gap: 10px; margin-top: 8px; }
+
+.map-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 14px; }
+.map-pane iframe {
+  width: 100%;
+  height: 380px;
+  border: 1px solid #e5edf3;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.pharmacy-list { display: grid; gap: 10px; }
+.pharmacy-item {
+  background: var(--surface);
+  border: 1px solid #e5edf3;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+}
+.pharmacy-item:hover { box-shadow: var(--shadow); }
+.pharmacy-details { margin-top: 12px; background: var(--surface); border: 1px solid #e5edf3; border-radius: var(--radius); padding: 14px; }
+
+.chat { background: var(--surface); border: 1px solid #e5edf3; border-radius: var(--radius); box-shadow: var(--shadow); }
+.chat-messages {
+  height: 360px;
+  overflow: auto;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+  background: linear-gradient(180deg, #f6fbff, #ffffff);
+  border-bottom: 1px solid #e9f1f6;
+}
+.bubble { max-width: 80%; padding: 10px 12px; border-radius: 14px; border: 1px solid #dfeef6; background: #ffffff; }
+.bubble.agent { background: #ebf7ff; border-color: #cfe9f9; }
+.bubble.user { margin-left: auto; background: #e6fff6; border-color: #bff0e3; }
+.chat-input { display: flex; gap: 10px; padding: 10px; }
+.chat-input input { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid #cfe1ec; }
+
+.app-footer { text-align: center; padding: 18px; color: var(--muted); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .card { grid-column: span 6; }
+  .map-layout { grid-template-columns: 1fr; }
+}
+@media (max-width: 680px) {
+  .card { grid-column: span 12; }
+  .form-grid { grid-template-columns: 1fr; }
+  .form-row { grid-column: span 12; }
+  .chat-messages { height: 300px; }
+}
+
+

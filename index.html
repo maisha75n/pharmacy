@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PharmaCare - Prescription Manager</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">💊</div>
+        <div class="brand-text">
+          <h1>PharmaCare</h1>
+          <p class="tagline">Your prescriptions, organized.</p>
+        </div>
+      </div>
+      <nav class="primary-nav" aria-label="Primary">
+        <button class="nav-btn is-active" data-section="dashboard" aria-controls="section-dashboard" aria-current="page">Dashboard</button>
+        <button class="nav-btn" data-section="upload" aria-controls="section-upload">Upload</button>
+        <button class="nav-btn" data-section="pharmacies" aria-controls="section-pharmacies">Pharmacies</button>
+        <button class="nav-btn" data-section="chat" aria-controls="section-chat">24/7 Chat</button>
+        <button class="nav-btn" data-section="profile" aria-controls="section-profile">Profile</button>
+      </nav>
+    </header>
+
+    <main class="app-main">
+      <!-- DASHBOARD -->
+      <section id="section-dashboard" class="section is-active" aria-labelledby="dashboard-heading">
+        <div class="section-header">
+          <h2 id="dashboard-heading">User Dashboard</h2>
+          <p class="section-subtitle">Active prescriptions and upcoming refills</p>
+        </div>
+        <div id="alerts" class="alerts" role="status" aria-live="polite"></div>
+        <div id="prescription-list" class="card-grid" aria-live="polite"></div>
+      </section>
+
+      <!-- UPLOAD -->
+      <section id="section-upload" class="section" aria-labelledby="upload-heading" hidden>
+        <div class="section-header">
+          <h2 id="upload-heading">Upload Prescription</h2>
+          <p class="section-subtitle">Add a new prescription to your dashboard</p>
+        </div>
+        <form id="upload-form" class="form">
+          <div class="form-row">
+            <label for="medicationName">Medication Name</label>
+            <input id="medicationName" name="medicationName" type="text" required placeholder="e.g., Atorvastatin" />
+          </div>
+          <div class="form-row">
+            <label for="dosage">Dosage</label>
+            <input id="dosage" name="dosage" type="text" required placeholder="e.g., 20 mg" />
+          </div>
+          <div class="form-row">
+            <label for="refillDate">Next Refill Date</label>
+            <input id="refillDate" name="refillDate" type="date" required />
+          </div>
+          <div class="form-row">
+            <label for="rxFile">Prescription File (optional)</label>
+            <input id="rxFile" name="rxFile" type="file" accept="image/*,.pdf" />
+            <small class="help-text">File is not uploaded to a server; this is a simulation.</small>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Add Prescription</button>
+            <button type="reset" class="btn">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- PHARMACIES / MAP -->
+      <section id="section-pharmacies" class="section" aria-labelledby="pharmacies-heading" hidden>
+        <div class="section-header">
+          <h2 id="pharmacies-heading">Nearby Pharmacies</h2>
+          <p class="section-subtitle">Find a pharmacy near you</p>
+        </div>
+        <div class="map-layout">
+          <div class="map-pane" aria-label="Map view">
+            <iframe id="mapFrame" title="Nearby pharmacies map" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <aside class="list-pane" aria-label="Pharmacy list">
+            <div id="pharmacy-list" class="pharmacy-list" aria-live="polite"></div>
+          </aside>
+        </div>
+        <div id="pharmacy-details" class="pharmacy-details" aria-live="polite"></div>
+      </section>
+
+      <!-- CHAT -->
+      <section id="section-chat" class="section" aria-labelledby="chat-heading" hidden>
+        <div class="section-header">
+          <h2 id="chat-heading">24/7 Support Chat</h2>
+          <p class="section-subtitle">Chat with our automated assistant</p>
+        </div>
+        <div class="chat">
+          <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+          <form id="chatForm" class="chat-input" autocomplete="off">
+            <input id="chatText" type="text" placeholder="Type your message..." aria-label="Message" required />
+            <button type="submit" class="btn primary">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- PROFILE -->
+      <section id="section-profile" class="section" aria-labelledby="profile-heading" hidden>
+        <div class="section-header">
+          <h2 id="profile-heading">Contact & Profile</h2>
+          <p class="section-subtitle">Update your personal info and preferences</p>
+        </div>
+        <form id="profile-form" class="form" novalidate>
+          <div class="form-grid">
+            <div class="form-row">
+              <label for="fullName">Full Name</label>
+              <input id="fullName" name="fullName" type="text" required placeholder="e.g., Alex Morgan" />
+              <small class="error" id="err-fullName" role="alert"></small>
+            </div>
+            <div class="form-row">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required placeholder="e.g., alex@example.com" />
+              <small class="error" id="err-email" role="alert"></small>
+            </div>
+            <div class="form-row">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" required placeholder="e.g., (555) 123-4567" />
+              <small class="error" id="err-phone" role="alert"></small>
+            </div>
+            <div class="form-row">
+              <label for="preferredCity">Preferred City/Area</label>
+              <input id="preferredCity" name="preferredCity" type="text" placeholder="e.g., Boston, MA" />
+              <small class="help-text">Used to center the map to your area.</small>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn primary">Save Profile</button>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>© <span id="year"></span> PharmaCare. For educational use only.</p>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+  </html>
+
+
