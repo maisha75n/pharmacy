@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Pharmacy Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Management System</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="pharmacies.html" class="nav-link">Pharmacies</a>
+            <a href="wellness.html" class="nav-link">Wellness</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="chat.html" class="nav-link">Chat</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <main>
+            <h2>Dashboard</h2>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Total Pharmacies</h3>
+                    <p class="stat-number" id="totalMedicines">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Programs</h3>
+                    <p class="stat-number" id="lowStockItems">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Uploads</h3>
+                    <p class="stat-number" id="todaySales">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Wellness Programs</h3>
+                    <p class="stat-number" id="totalCustomers">0</p>
+                </div>
+            </div>
+
+            <div class="dashboard-sections">
+                <div class="dashboard-section">
+                    <h3>Recent Activity</h3>
+                    <div class="table-section">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>File Name</th>
+                                    <th>Records</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recentSalesBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="dashboard-section">
+                    <h3>Upcoming Programs</h3>
+                    <div class="table-section">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Program</th>
+                                    <th>End Date</th>
+                                    <th>Days Left</th>
+                                </tr>
+                            </thead>
+                            <tbody id="expiringSoonBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

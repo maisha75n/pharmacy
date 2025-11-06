@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacies - Pharmacy Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Management System</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="pharmacies.html" class="nav-link active">Pharmacies</a>
+            <a href="wellness.html" class="nav-link">Wellness</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="chat.html" class="nav-link">Chat</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <main>
+            <h2>Pharmacies</h2>
+            
+            <div class="form-section">
+                <h3>Add New Pharmacy</h3>
+                <form id="pharmacyForm">
+                    <input type="text" id="pharmacyName" placeholder="Pharmacy Name" required>
+                    <input type="text" id="pharmacyAddress" placeholder="Address" required>
+                    <input type="tel" id="pharmacyPhone" placeholder="Phone Number" required>
+                    <input type="email" id="pharmacyEmail" placeholder="Email" required>
+                    <input type="text" id="pharmacyLicense" placeholder="License Number" required>
+                    <button type="submit">Add Pharmacy</button>
+                </form>
+            </div>
+
+            <div class="table-section">
+                <h3>Pharmacy List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th>License</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pharmaciesBody">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="pharmacies.js"></script>
+</body>
+</html>
+

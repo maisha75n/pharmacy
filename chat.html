@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Pharmacy Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Management System</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="pharmacies.html" class="nav-link">Pharmacies</a>
+            <a href="wellness.html" class="nav-link">Wellness</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="chat.html" class="nav-link active">Chat</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <main>
+            <div class="chat-container">
+                <div class="chat-sidebar">
+                    <h3>Conversations</h3>
+                    <div class="chat-search">
+                        <input type="text" id="chatSearch" placeholder="Search conversations...">
+                    </div>
+                    <div id="conversationsList" class="conversations-list">
+                        <!-- Conversations will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="chat-main">
+                    <div class="chat-header">
+                        <h3 id="chatTitle">Select a conversation</h3>
+                    </div>
+                    <div id="chatMessages" class="chat-messages">
+                        <div class="empty-message">Select a conversation to start chatting</div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="messageInput" placeholder="Type your message..." disabled>
+                        <button id="sendButton" onclick="sendMessage()" disabled>Send</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="chat.js"></script>
+</body>
+</html>
+

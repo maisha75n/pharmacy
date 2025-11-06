@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics - Pharmacy Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Management System</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="pharmacies.html" class="nav-link">Pharmacies</a>
+            <a href="wellness.html" class="nav-link">Wellness</a>
+            <a href="analytics.html" class="nav-link active">Analytics</a>
+            <a href="chat.html" class="nav-link">Chat</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <main>
+            <h2>Analytics & Reports</h2>
+            
+            <div class="analytics-filters">
+                <select id="timePeriod">
+                    <option value="today">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month" selected>This Month</option>
+                    <option value="year">This Year</option>
+                </select>
+                <button onclick="generateReport()">Generate Report</button>
+            </div>
+
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>Upload Overview</h3>
+                    <div class="analytics-content">
+                        <p class="analytics-value" id="totalRevenue">0</p>
+                        <p class="analytics-label">Total Uploads</p>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Top Upload Types</h3>
+                    <div class="table-section">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Count</th>
+                                    <th>Records</th>
+                                </tr>
+                            </thead>
+                            <tbody id="topSellingBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Pharmacy Statistics</h3>
+                    <div class="analytics-content">
+                        <p class="analytics-value" id="totalCustomersAnalytics">0</p>
+                        <p class="analytics-label">Total Pharmacies</p>
+                        <p class="analytics-value" id="newCustomers">0</p>
+                        <p class="analytics-label">New This Period</p>
+                    </div>
+                </div>
+
+                <div class="analytics-card">
+                    <h3>Wellness Programs</h3>
+                    <div class="analytics-content">
+                        <p class="analytics-value" id="totalStockValue">$0.00</p>
+                        <p class="analytics-label">Total Program Value</p>
+                        <p class="analytics-value" id="lowStockCount">0</p>
+                        <p class="analytics-label">Active Programs</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="analytics.js"></script>
+</body>
+</html>
+

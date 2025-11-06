@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness - Pharmacy Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pharmacy Management System</h1>
+        </header>
+
+        <nav class="navigation">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="upload.html" class="nav-link">Upload</a>
+            <a href="pharmacies.html" class="nav-link">Pharmacies</a>
+            <a href="wellness.html" class="nav-link active">Wellness</a>
+            <a href="analytics.html" class="nav-link">Analytics</a>
+            <a href="chat.html" class="nav-link">Chat</a>
+            <a href="profile.html" class="nav-link">Profile</a>
+        </nav>
+
+        <main>
+            <h2>Wellness Programs</h2>
+            
+            <div class="form-section">
+                <h3>Add Wellness Program</h3>
+                <form id="wellnessForm">
+                    <input type="text" id="programName" placeholder="Program Name" required>
+                    <textarea id="programDescription" placeholder="Description" rows="4" required></textarea>
+                    <input type="date" id="programStartDate" required>
+                    <input type="date" id="programEndDate" required>
+                    <input type="number" id="programPrice" placeholder="Price" step="0.01" required>
+                    <button type="submit">Add Program</button>
+                </form>
+            </div>
+
+            <div class="wellness-cards">
+                <h3>Available Programs</h3>
+                <div id="wellnessProgramsContainer" class="programs-grid">
+                    <!-- Programs will be loaded here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="wellness.js"></script>
+</body>
+</html>
+
